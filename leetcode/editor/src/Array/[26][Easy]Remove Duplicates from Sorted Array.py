@@ -63,15 +63,26 @@ from typing import List
 
 
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
-        countedValue = -105
-        for num in nums[:]:
-            if num == countedValue:
-                nums.remove(num)
-            else:
-                countedValue = num
+    # # It will violate the extra space forbidden
+    # def removeDuplicates(self, nums: List[int]) -> int:
+    #     countedValue = -105
+    #     # use nums[:] will create a new array with the same value
+    #     for num in nums[:]:
+    #         if num == countedValue:
+    #             nums.remove(num)
+    #         else:
+    #             countedValue = num
+    #     return len(nums)
 
-        return len(nums)
+    def removeDuplicates(self, nums: List[int]) -> int:
+        leftPointer = 0
+        rightPointer = 1
+        while rightPointer < len(nums):
+            if nums[leftPointer] != nums[rightPointer]:
+                nums[leftPointer + 1] = nums[rightPointer]
+                leftPointer += 1
+            rightPointer += 1
+        return leftPointer + 1
 
 
 # leetcode submit region end(Prohibit modification and deletion)
@@ -81,14 +92,14 @@ class TestCase(unittest.TestCase):
         inputNums = [1, 1, 2]
         expectedResult = 2
 
-        self.assertEqual(Solution().removeDuplicates(inputNums), expectedResult)
+        self.assertEqual(expectedResult, Solution().removeDuplicates(inputNums))
         print(inputNums)
 
     def testIsValid_2(self):
         inputNums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
         expectedResult = 5
 
-        self.assertEqual(Solution().removeDuplicates(inputNums), expectedResult)
+        self.assertEqual(expectedResult, Solution().removeDuplicates(inputNums))
         print(inputNums)
 
 
