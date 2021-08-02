@@ -38,19 +38,6 @@ import unittest
 
 
 class Solution:
-    # Brutal Force:
-    # def countPrimes(self, inputNumber: int) -> int:
-    #     primes = set()
-    #     for number in range(2, inputNumber):
-    #         isNotPrime = False
-    #         for prime in primes:
-    #             if number % prime == 0:
-    #                 isNotPrime = True
-    #                 break
-    #         if isNotPrime is False:
-    #             primes.add(number)
-    #     return len(primes)
-
     def countPrimes(self, n) -> int:
         # Use Sieve of Eratosthenes ( https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes )
         # Cost : Space Complexity will be O(n)
