@@ -35,13 +35,13 @@ from typing import List
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        result = {}
+        singleNumber = 0
         for num in nums:
-            if num in result:
-                result[num] += 1
-            else:
-                result[num] = 1
-        return min(result, key=result.get)
+            # XOR Operation:
+            # 0 ^ N = N
+            # N ^ N = 0
+            singleNumber ^= num
+        return singleNumber
 
 
 # leetcode submit region end(Prohibit modification and deletion)
