@@ -70,11 +70,15 @@ from typing import List
 
 class Solution:
     def removeElement(self, inputNums: List[int], val: int) -> int:
-        if len(inputNums) == 0:
-            return 0
-        while val in inputNums:
-            inputNums.remove(val)
-        return len(inputNums)
+        leftPointer = 0
+        rightPointer = len(inputNums) - 1
+        while leftPointer <= rightPointer:
+            if inputNums[leftPointer] == val:
+                inputNums[leftPointer], inputNums[rightPointer] = inputNums[rightPointer], inputNums[leftPointer]
+                rightPointer -= 1
+            else:
+                leftPointer += 1
+        return leftPointer
 
 
 # leetcode submit region end(Prohibit modification and deletion)
