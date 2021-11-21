@@ -39,18 +39,25 @@ from typing import List
 
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        tempValue = target
-        if target in nums:
-            return nums.index(target)
-        else:
-            while tempValue not in nums and nums[-1] > tempValue:
-                tempValue += 1
-            while tempValue not in nums and nums[-1] < tempValue:
-                tempValue -= 1
-            if tempValue > target:
-                return nums.index(tempValue)
+        if len(nums) == 0:
+            return 0
+        leftPoint, rightPoint = 0, len(nums) - 1
+        while leftPoint <= rightPoint:
+            pivot = leftPoint + (rightPoint - leftPoint) // 2
+            if target == nums[pivot]:
+                return pivot
+            elif target < nums[pivot]:
+                if pivot == 0:
+                    return 0
+                if target > nums[pivot - 1]:
+                    return pivot
+                rightPoint = pivot - 1
             else:
-                return nums.index(tempValue) + 1
+                if pivot == len(nums) - 1:
+                    return pivot + 1
+                elif target < nums[pivot + 1]:
+                    return pivot + 1
+                leftPoint = pivot + 1
 
 
 # leetcode submit region end(Prohibit modification and deletion)
